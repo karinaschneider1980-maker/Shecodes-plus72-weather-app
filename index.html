@@ -4,28 +4,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/styles.css" />
   <title>Weather app</title>
 </head>
 
 <body>
-  <header>
-    <form>
-      <input type="search" placeholder="Enter a city.." required />
-      <input type="submit" value="Search" />
-    </form>
-  </header>
-  <main>
-    <div>
-      <h1>Uithoorn</h1>
-      <p>
-        Tuesday 17:45, scattered clouds
-        <br />
-        Humidity: 82% Wind: 10km/h
-      </p>
-    </div>
-    <div> 🌤️11°</div>
-  </main>
-  <footer>This project was coded by
+  <div class="weather-app">
+    <header>
+      <form class="search-form">
+        <input type="search" placeholder="Enter a city.." required class="search-form-input" />
+        <input type="submit" value="Search" class="search-form-button" />
+      </form>
+    </header>
+
+    <main class="weather-main">
+      <div class="current-weather">
+        <h1>Uithoorn</h1>
+        <div class="weather-temperature-container">
+          <span class="weather-icon">🌤️</span>
+          <span class="weather-value">11</span>
+          <span class="weather-unit">°C</span>
+        </div>
+        <p class="weather-details">
+          Tuesday 17:45, scattered clouds
+        </p>
+        <div class="weather-extra">
+          <span>Humidity:82%</span>
+          <span>Wind:10km/h</span>
+        </div>
+      </div>
+      <div class="weather-forecast">
+        <!-- straks 7 dagen hier -->
+      </div>
+    </main>
+  </div>
+
+  <footer class="weather-footer">
+    This project was coded by
     <a href="https://github.com/karinaschneider1980-maker" target="_blank"> Karina Schneider </a>, in
     <a href="https://github.com/karinaschneider1980-maker/Shecodes-plus72-weather-app" target="_blank">open-sourced on
       GitHub </a>,
