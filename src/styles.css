@@ -38,7 +38,8 @@ body {
 
 .weather-temperature-container {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  gap: 6px;
 }
 
 .weather-details {
@@ -47,7 +48,7 @@ body {
 
 .weather-extra {
   display: flex;
-  gap: 20px;
+  gap: 5px;
   font-size: 14px;
   margin-top: 6px;
 }
@@ -56,20 +57,25 @@ body {
   color: #555;
 }
 
-.weather-icon {
-  font-size: 28px;
-  margin-top: -2px;
+#icon img {
+  height: 44px;
+  width: 44px;
 }
+
+.weather-temperature {
+  display: flex;
+  align-items: flex-start;
+}
+
 .weather-value {
-  font-size: 38px;
+  font-size: 36px;
   font-weight: 600;
-  margin-left: 10px;
 }
 
 .weather-unit {
-  font-size: 22px;
+  font-size: 18px;
+  margin-top: 6px;
   opacity: 0.7;
-  margin-top: 4px;
 }
 
 .weather-footer {

@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="src/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
   <title>Weather app</title>
 </head>
 
@@ -20,17 +21,22 @@
     <main class="weather-main">
       <div class="current-weather">
         <h1 class="weather-app-city" id="city">Uithoorn</h1>
+
         <div class="weather-temperature-container">
-          <span class="weather-icon">🌤️</span>
-          <span class="weather-value">11</span>
-          <span class="weather-unit">°C</span>
+          <div id="icon"></div>
+
+          <div class="weather-temperature">
+            <span class="weather-value" id="temperature">11</span>
+            <span class="weather-unit">°C</span>
+          </div>
         </div>
         <p class="weather-details">
-          Tuesday 17:45 scattered clouds
+          <span id="time"></span>
+          <span id="description"></span>
         </p>
         <div class="weather-extra">
-          <span>Humidity:82%</span>
-          <span>Wind:10km/h</span>
+          Humidity: <span id="humidity"></span>
+          Wind: <span id="wind"></span>
         </div>
       </div>
       <div class="weather-forecast">
