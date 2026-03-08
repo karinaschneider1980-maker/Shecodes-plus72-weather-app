@@ -13,9 +13,23 @@ function refreshWeather(response) {
   timeElement.innerHTML = formatDate(date)
   descriptionElement.innerHTML = response.data.condition.description
   humidityElement.innerHTML = `${response.data.temperature.humidity} %`
-  windElement.innerHTML = `${response.data.wind.speed} km/h`
+  windElement.innerHTML = `${Math.round(response.data.wind.speed)} km/h`
   temperatureElement.innerHTML = Math.round(temperature)
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`
+
+  let condition = response.data.condition.description.toLowerCase()
+
+  if (condition.includes("cloud")) {
+    document.body.style.background = "linear-gradient(#d7dde8,#a6b1c2)"
+  } else if (condition.includes("rain")) {
+    document.body.style.background = "linear-gradient(#5f6c7b,#3f4c5a)"
+  } else if (condition.includes("clear")) {
+    document.body.style.background = "linear-gradient(#74b9ff,#a29bfe)"
+  } else if (condition.includes("snow")) {
+    document.body.style.background = "linear-gradient(#e6foff,#cfd9df)"
+  }
+
+  getForecast(response.data.city)
 }
 
 function formatDate(date) {
@@ -54,31 +68,41 @@ function searchCity(event) {
   searchForCity(searchInput.value)
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000)
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+
+  return days[date.getDay()]
+}
+
 function getForecast(city) {
   let apiKey = "d37caee084ftd6c3baf32ae334oca1bf"
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`
-  console.log(apiUrl)
+  axios.get(apiUrl).then(displayForecast)
 }
 
-function displayForecast() {
-  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+function displayForecast(response) {
+  console.log(response.data)
+
   let forecastHtml = ""
 
-  days.forEach(function (day) {
-    forecastHtml =
-      forecastHtml +
-      `
+  response.data.daily.forEach(function (day, index) {
+    if (index < 6 && index > 0) {
+      forecastHtml =
+        forecastHtml +
+        `
      <div class="weather-forecast-day">
-        <div class="weather-forecast-date">${day}</div>
-        <div class="weather-forecast-icon">🌤️</div>
+        <div class="weather-forecast-date">${formatDay(day.time)}</div>
+
+        <img src="${day.condition.icon_url}" class="weather-forecast-icon"/>
         <div class="weather-forecast-temperatures">
           <div class="weather-forecast-temperature">
-            <strong>15°</strong>
+            <strong>${Math.round(day.temperature.maximum)}°</strong>
           </div>
-          <div class="weather-forecast-temperature">9°</div>
+          <div class="weather-forecast-temperature">${Math.round(day.temperature.minimum)}°</div>
         </div>
-      </div>
-      `
+      </div>`
+    }
   })
 
   let forecastElement = document.querySelector("#forecast")
@@ -88,6 +112,4 @@ function displayForecast() {
 let searchFormElement = document.querySelector("#search-form")
 searchFormElement.addEventListener("submit", searchCity)
 
-searchCity("Uithoorn")
-getForecast("Uithoorn")
-displayForecast()
+searchForCity("Uithoorn")
