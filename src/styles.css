@@ -9,6 +9,7 @@ body {
 .weather-app {
   background: white;
   max-width: 600px;
+  Width: 100%
   margin: 30px auto;
   padding: 35px;
   box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
@@ -19,6 +20,7 @@ body {
   display: flex;
   gap: 0px;
   margin: 20px auto;
+  width: 100%;
   box-shadow: 0 5px 10px rgba(65, 50, 100, 0.08);
 }
 
